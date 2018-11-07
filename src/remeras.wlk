@@ -67,7 +67,7 @@ class RemeraSubliminada inherits RemeraBasica{
 }
 
 class Empresa{
-	var property derechosDeAutor
-	var property tieneConvenio
+	var property derechosDeAutor//numero
+	var property tieneConvenio//boleano
 }
 

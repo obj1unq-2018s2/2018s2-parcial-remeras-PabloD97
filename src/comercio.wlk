@@ -31,10 +31,13 @@ class Comercio{
 		})
 	}
 	//6
+	method talleNoPedidos(){
+		return pedidos.map({ pedido=>pedido.modeloDeRemera().talle() })
+	}
 	
 	method noHuboPedidosDeTalle(){
-		
-		return pedidos.map({ pedido=>pedido.modeloDeRemera().talle() })
+		var talles= new Range(32,48)
+		return talles.asList().asSet().intersection(self.talleNoPedidos()) 
 	}
 	
 	//7

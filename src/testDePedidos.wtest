@@ -88,6 +88,13 @@ describe "sucursales piden"{
 		assert.equals(pedido1, comercio.pedidoMasCaro())
 	}
 	
+	test "punto 6- talles no vendidas"{
+		comercio.registrarPedido(pedido1)
+		comercio.registrarPedido(pedido2)
+		comercio.registrarPedido(pedido3)
+		assert.equals( #{42,44}, comercio.noHuboPedidosDeTalle() )
+	}
+	
 	test "punto 7- sucursal que mas facturo"{
 		comercio.registrarPedido(pedido1)
 		comercio.registrarPedido(pedido2)
