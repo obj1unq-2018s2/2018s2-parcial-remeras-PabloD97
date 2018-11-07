@@ -1,0 +1,104 @@
+import pedidosYsucursales.*
+import remeras.*
+import comercio.*
+
+describe "sucursales piden"{
+
+	var disney= new Empresa( derechosDeAutor=100, tieneConvenio=true )
+	var lisa=new RemeraBasica(color="negro",talle=42)
+	
+	var remeraBordeada = new RemeraBordeada(
+		color="negro",
+		talle=44,
+		cantidadDeColores=2
+	)
+	var sublimadoDeFrozen =new RemeraSubliminada(
+		color="negro",
+		talle=44,
+		anchoDelDibujo=10,
+		largoDelDibujo=15,
+		empresaDelDibujo=disney
+	) 
+	
+	
+	var flores= new Sucursal(
+		cantidadMinima=10
+	)
+	
+	var avellaneda= new Sucursal(
+		cantidadMinima=2
+	)
+	
+	var pedido1= new Pedido(
+		modeloDeRemera=lisa,
+		cantidadDeRemera=5,
+		sucursal=flores
+	)
+	var pedido2= new Pedido(
+		modeloDeRemera=lisa,
+		cantidadDeRemera=5,
+		sucursal=avellaneda
+	)
+	
+	var pedido3= new Pedido(
+		modeloDeRemera=sublimadoDeFrozen,
+		cantidadDeRemera=5,
+		sucursal=avellaneda
+	)
+	
+	var comercio= new Comercio()
+	
+	//parte B
+	test "pedido de flores"{
+		assert.equals( 500, pedido1.precioDelPedido())
+	}
+	
+	test "pedido de avellaneda"{
+		assert.equals( 450, pedido2.precioDelPedido())
+	}
+	test "pedido de remeras de frozen"{
+		assert.equals( 1100, pedido3.precioDelPedido() )
+	}
+	
+	// Parte C
+	test "punto 1- agregar pedido"{
+		comercio.registrarPedido(pedido1)
+		assert.equals([pedido1] ,comercio.pedidos() )
+	}
+	
+	test "punto 2- agregar pedido"{
+		comercio.registrarPedido(pedido1)
+		comercio.registrarPedido(pedido2)
+		assert.equals( 950, comercio.totalFacturado())
+	}
+	test "punto 3- total factura en la sucursal de avellaneda"{
+		comercio.registrarPedido(pedido1)
+		comercio.registrarPedido(pedido2)
+		assert.equals(450, comercio.tatalFacturadoDeSucursal(avellaneda))
+	}
+	test "punto 4- total factura de pedido de color negro"{
+		comercio.registrarPedido(pedido1)
+		comercio.registrarPedido(pedido2)
+		assert.equals(2, comercio.pedidosDeRemerasDe("negro"))
+	}
+	
+	test "punto 5- pedido mas caro"{
+		comercio.registrarPedido(pedido1)
+		comercio.registrarPedido(pedido2)
+		assert.equals(pedido1, comercio.pedidoMasCaro())
+	}
+	
+	test "punto 7- sucursal que mas facturo"{
+		comercio.registrarPedido(pedido1)
+		comercio.registrarPedido(pedido2)
+		comercio.registrarPedido(pedido3)
+		assert.equals( avellaneda, comercio.sucursalQueMasFacturo() )
+	}
+	
+	
+}
+
+
+
+
+

@@ -1,0 +1,46 @@
+import remeras.*
+
+describe "verificando costos"{
+	
+	var disney= new Empresa( derechosDeAutor=100 )
+	
+	var lisa=new RemeraBasica(
+		color="negro",
+		talle=35
+	)
+	
+	var remeraBordeada = new RemeraBordeada(
+		color="negro",
+		talle=44,
+		cantidadDeColores=2
+	)
+	
+	var lisaConColor=new RemeraBasica(
+		color="verde",
+		talle=35
+	)
+	
+	var sublimadoDeFrozen =new RemeraSubliminada(
+		color="negro",
+		talle=44,
+		anchoDelDibujo=10,
+		largoDelDibujo=15,
+		empresaDelDibujo=disney
+	) 
+	
+	test "costo de remera lisa"{
+		assert.equals(80 ,lisa.costo() )
+	}
+	
+	test "costo de remera lisa  de color"{
+		assert.equals(88 ,lisaConColor.costo() )
+	}
+	
+	test "costo de remera bordeada"{
+		assert.equals(120 ,remeraBordeada.costo() )
+	}
+	
+	test "costo de remera de frozen"{
+		assert.equals(275,sublimadoDeFrozen.costo())
+	}
+}
